@@ -1,23 +1,28 @@
-## Crypto Tracking Spring Boot App
+# Crypto Tracking Spring Boot App
 
-**Technologies**
+## Technologies
 
 * Java - Spring Boot
+* Spring Data JPA
 * Lombok
+* PostgreSQL
+* Binance API
 
-You can see a crypto price with its symbol
+## Features
 
-`localhost:8080/v1/crypto/avgPrice/MATICUSDT`
+* Sign up
+* Add any crypto in Binance to your watchlist
+* See any crypto price in Binance
 
-```json
-{
-    "mins": 5,
-    "price": 0.85199977,
-    "symbol": "MATICUSDT"
-}
+## Db
+
+java/src/main/resources/application.properties on line 10 and 11;
+
+```properties
+spring.datasource.username= YOUR_USERNAME
+spring.datasource.password= YOUR_PASSWORD
 ```
 
-**To be Added**
+put your username instead of "YOUR_USERNAME" and your password instead of "YOUR_PASSWORD"
 
-* Users
-* Watchlist for every user
+In PostgreSQL open a db called DbUsersTest
