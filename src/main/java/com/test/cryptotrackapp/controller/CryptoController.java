@@ -15,7 +15,7 @@ public class CryptoController {
 
     private final CryptoService cryptoService;
 
-    @GetMapping("/avgPrice/{symbol}")
+    @GetMapping("/price/{symbol}")
     public ResponseEntity<?> getAvgPrice(@PathVariable String symbol) {
         return ResponseEntity.ok(cryptoService.getAvgPrice(symbol));
     }
