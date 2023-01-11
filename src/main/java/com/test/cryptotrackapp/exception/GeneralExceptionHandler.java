@@ -1,5 +1,7 @@
 package com.test.cryptotrackapp.exception;
 
+import com.test.cryptotrackapp.core.result.ErrorDataResult;
+import com.test.cryptotrackapp.core.result.ErrorResult;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +31,11 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorDataResult<>(errors, "Error"), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(SymbolNotFoundException.class)
     public ResponseEntity<?> symbolNotFoundExceptionHandler(SymbolNotFoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ErrorResult(exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }
