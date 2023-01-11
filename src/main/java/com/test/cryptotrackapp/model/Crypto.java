@@ -11,7 +11,8 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AvgPrice {
+public class Crypto {
+
     private int mins;
     private BigDecimal price;
     private String symbol;

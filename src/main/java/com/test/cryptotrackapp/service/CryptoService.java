@@ -1,8 +1,8 @@
 package com.test.cryptotrackapp.service;
 
-import com.test.cryptotrackapp.dto.AvgPriceConverter;
-import com.test.cryptotrackapp.dto.AvgPriceDto;
-import com.test.cryptotrackapp.model.AvgPrice;
+import com.test.cryptotrackapp.dto.converter.CryptoConverter;
+import com.test.cryptotrackapp.dto.CryptoDto;
+import com.test.cryptotrackapp.model.Crypto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -12,13 +12,13 @@ import org.springframework.web.client.RestTemplate;
 public class CryptoService {
 
     private final RestTemplate restTemplate;
-    private final AvgPriceConverter converter;
+    private final CryptoConverter converter;
 
-    public AvgPriceDto getAvgPrice(String symbol) {
-        AvgPrice avgPrice = restTemplate.getForObject("https://api1.binance.com/api/v3/avgPrice?symbol=" + symbol, AvgPrice.class);
-        avgPrice.setSymbol(symbol);
+    public CryptoDto getAvgPrice(String symbol) {
+        Crypto crypto = restTemplate.getForObject("https://api1.binance.com/api/v3/avgPrice?symbol=" + symbol, Crypto.class);
+        crypto.setSymbol(symbol);
 
-        return converter.convert(avgPrice);
+        return converter.convert(crypto);
     }
 
 
