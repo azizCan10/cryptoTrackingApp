@@ -34,8 +34,8 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new ErrorDataResult<>(errors, "Error"), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(SymbolNotFoundException.class)
-    public ResponseEntity<?> symbolNotFoundExceptionHandler(SymbolNotFoundException exception) {
-        return new ResponseEntity<>(new ErrorResult(exception.getMessage()), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<?> notFoundExceptionHandler(NotFoundException exception) {
+        return new ResponseEntity<>(new ErrorResult(exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 }

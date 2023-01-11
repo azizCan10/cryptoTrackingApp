@@ -28,7 +28,7 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler {
                 Scanner s = new Scanner(response.getBody()).useDelimiter("\\A");
                 String result = s.hasNext() ? s.next() : "";
 
-                throw new SymbolNotFoundException(result);
+                throw new NotFoundException(result);
             }
         }
     }
