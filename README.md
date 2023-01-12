@@ -11,8 +11,8 @@
 ## Features
 
 * Sign up
-* Add any crypto in Binance to your watchlist
-* See any crypto price in Binance
+* Add any crypto to your watchlist
+* See any crypto price
 
 ## Db
 
