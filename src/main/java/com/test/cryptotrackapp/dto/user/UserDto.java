@@ -1,5 +1,6 @@
 package com.test.cryptotrackapp.dto.user;
 
+import com.test.cryptotrackapp.dto.Crypto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +16,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String username;
-    private List<String> trackedCryptos;
+    //    private List<String> trackedCryptos;
+    private List<Crypto> trackedCryptos;
+
 }

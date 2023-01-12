@@ -1,4 +1,4 @@
-package com.test.cryptotrackapp.model;
+package com.test.cryptotrackapp.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Crypto {
-
     private int mins;
     private BigDecimal price;
     private String symbol;

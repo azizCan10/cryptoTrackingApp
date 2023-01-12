@@ -4,6 +4,7 @@ import com.test.cryptotrackapp.core.result.DataResult;
 import com.test.cryptotrackapp.core.result.Result;
 import com.test.cryptotrackapp.core.result.SuccessDataResult;
 import com.test.cryptotrackapp.core.result.SuccessResult;
+import com.test.cryptotrackapp.dto.Crypto;
 import com.test.cryptotrackapp.dto.converter.UserConverter;
 import com.test.cryptotrackapp.dto.user.CreateUserRequest;
 import com.test.cryptotrackapp.dto.user.UserDto;
@@ -24,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserConverter converter;
     private final UserCryptoListService userCryptoListService;
+    private final CryptoService cryptoService;
 
     public Result add(CreateUserRequest user) {
         userRepository.save(converter.convert(user));
@@ -37,9 +39,13 @@ public class UserService {
                 .map(UserCryptoListDto::getSymbol)
                 .collect(Collectors.toList());
 
-        userDto.setTrackedCryptos(symbols);
+        List<Crypto> cryptos = symbols.stream()
+                .map(cryptoService::getAvgPrice)
+                .collect(Collectors.toList());
 
-        return new SuccessDataResult<>(userDto, "User listed.");
+        userDto.setTrackedCryptos(cryptos);
+
+        return new SuccessDataResult<>(userDto);
     }
 
     public Result delete(long id) {
@@ -51,6 +57,6 @@ public class UserService {
 
     private User findUserById(long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User couldn't find by id: " + id));
+                .orElseThrow(() -> new NotFoundException("Account couldn't find by id: " + id));
     }
 }
