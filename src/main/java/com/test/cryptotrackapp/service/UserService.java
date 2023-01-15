@@ -33,19 +33,15 @@ public class UserService {
     }
 
     public DataResult<UserDto> getById(long id) {
-        UserDto userDto = converter.convert(findUserById(id));
 
-        List<String> symbols = userCryptoListService.findByUserId(id).stream()
-                .map(UserCryptoListDto::getSymbol)
-                .collect(Collectors.toList());
+        return new SuccessDataResult<>(convert(findUserById(id)));
+    }
 
-        List<Crypto> cryptos = symbols.stream()
-                .map(cryptoService::getAvgPrice)
-                .collect(Collectors.toList());
+    public DataResult<UserDto> signIn(String username, String password) {
+        User user = userRepository.getByUsernameAndPassword(username, password)
+                .orElseThrow(() -> new NotFoundException("Username or password is incorrect."));
 
-        userDto.setTrackedCryptos(cryptos);
-
-        return new SuccessDataResult<>(userDto);
+        return new SuccessDataResult<>(convert(user));
     }
 
     public Result delete(long id) {
@@ -58,5 +54,21 @@ public class UserService {
     private User findUserById(long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Account couldn't find by id: " + id));
+    }
+
+    private UserDto convert(User user) {
+        UserDto userDto = converter.convert(user);
+
+        List<String> symbols = userCryptoListService.findByUserId(user.getId()).stream()
+                .map(UserCryptoListDto::getSymbol)
+                .collect(Collectors.toList());
+
+        List<Crypto> cryptos = symbols.stream()
+                .map(cryptoService::getAvgPrice)
+                .collect(Collectors.toList());
+
+        userDto.setTrackedCryptos(cryptos);
+
+        return userDto;
     }
 }

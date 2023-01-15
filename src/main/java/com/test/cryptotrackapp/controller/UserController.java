@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
+@CrossOrigin
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
@@ -21,6 +22,11 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable long id) {
         return ResponseEntity.ok(userService.getById(id));
+    }
+
+    @GetMapping("/signin")
+    public ResponseEntity<?> signIn(String username, String password) {
+        return ResponseEntity.ok(userService.signIn(username, password));
     }
 
     @DeleteMapping("/{id}")

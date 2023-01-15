@@ -4,12 +4,10 @@ import com.test.cryptotrackapp.dto.userCryptoList.CreateUserCryptoListRequest;
 import com.test.cryptotrackapp.service.UserCryptoListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
+@CrossOrigin
 @RestController
 @RequestMapping("/v1/usercryptolist")
 public class UserCryptoListController {
