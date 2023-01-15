@@ -10,6 +10,7 @@
 
 ## Features
 
+* Sign in
 * Sign up
 * Add any crypto to your watchlist
 * See any crypto price
